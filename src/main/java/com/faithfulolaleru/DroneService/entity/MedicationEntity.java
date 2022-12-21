@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity(name = "medication_table")
 @Data
@@ -20,11 +17,17 @@ public class MedicationEntity {
     @Id
     private String id;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "weight")
     private Integer weight;
 
+    @Column(name = "code")
     private String code;
+
+    @Column(name = "photo_link")
+    private String photoLink;
 
     @ManyToOne
     @JoinColumn(name = "drone_serial")

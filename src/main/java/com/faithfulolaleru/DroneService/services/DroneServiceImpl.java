@@ -30,6 +30,8 @@ public class DroneServiceImpl implements DroneService {
 
     @Override
     public DroneResponse registerDrone(DroneRequest request) {
+
+        // prepare to create
         DroneEntity droneEntity = buildDroneEntity(request);
         boolean canSave = AppUtils.validateDroneEntityToSave(droneEntity);
 

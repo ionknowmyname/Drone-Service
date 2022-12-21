@@ -8,4 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MedicationRequest {
+
+    private String name;
+    private Integer weight;
+    private String code;
 }
