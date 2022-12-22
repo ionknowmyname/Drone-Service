@@ -14,7 +14,9 @@ public class DroneBatteryLogScheduler {
     private final DroneBatteryLogService droneBatteryLogService;
 
 
-    @Scheduled(cron = "0 0 0/3 * * ?") //every 3 hours
+
+    // @Scheduled(cron = "0 0/5 * * * ?") // 5 minutes for testing
+    @Scheduled(cron = "0 0 0/3 * * ?")  //every 3 hours
     public void saveBatteryLog() {
 
         droneBatteryLogService.saveDroneBatteryLog();

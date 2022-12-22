@@ -28,3 +28,12 @@
 
 
 **More Information:**
+
+    - For file to save successfuly, change the filePath in MedicationServiceImpl to a location on your
+        local PC
+
+    - In production, instead of saving the file to hardcoded file path on local machine, save the file 
+        to a 3rd party serivce, and then save the response to the database.
+
+    - The cron job would keep saving the same value for battery percentage because there's no mechanism
+        in place to reduce the battery percentage
