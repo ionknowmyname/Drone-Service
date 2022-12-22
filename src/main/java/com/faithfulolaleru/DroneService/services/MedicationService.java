@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public interface MedicationService {
 
-    MedicationResponse createMedication(String request, MultipartFile file);
+    MedicationResponse createMedication(String name, Integer weight, MultipartFile file);
 
     String test(MultipartFile file);
 

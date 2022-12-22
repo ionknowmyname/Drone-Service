@@ -19,10 +19,11 @@ public class MedicationController {
 
     @PostMapping(value = "/", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE,
                                                 MediaType.APPLICATION_JSON_VALUE })
-    public AppResponse<?> createMedication(@RequestPart(value = "request") String request,
+    public AppResponse<?> createMedication(@RequestParam(value = "name") String name,
+                                           @RequestParam(value = "weight") Integer weight,
                                            @RequestPart(value = "file") MultipartFile file) {
 
-        MedicationResponse response = medicationService.createMedication(request, file);
+        MedicationResponse response = medicationService.createMedication(name, weight, file);
 
         return AppResponse.builder()
                 .statusCode(HttpStatus.CREATED.value())

@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -30,7 +31,7 @@ import java.util.UUID;
 public class MedicationServiceImpl implements MedicationService {
 
     // @Value("${file.upload-dir}")
-    private static String filePath = "/Users/Faithful/Pictures/forJava/";
+    private final String filePath = "C:/Users/Faithful/Pictures/forJava/";
 
     private final MedicationRepository medicationRepository;
 
@@ -45,10 +46,10 @@ public class MedicationServiceImpl implements MedicationService {
 
 
     @Override
-    public MedicationResponse createMedication(String request, MultipartFile file) {
+    public MedicationResponse createMedication(String name, Integer weight, MultipartFile file) {
 
-        ObjectMapper mapper = new ObjectMapper();
-        MedicationRequest requestDto;
+//        ObjectMapper mapper = new ObjectMapper();
+//        MedicationRequest requestDto;
         String photoLink = "";
         String responseMessage = "No file was uploaded";
 
@@ -68,25 +69,28 @@ public class MedicationServiceImpl implements MedicationService {
         }
 
 
-        // for requestDto
-        try{
-            requestDto = mapper.readValue(request, MedicationRequest.class);
-        } catch (JsonProcessingException e) {
-            log.error("Error while mapping to class --> {}", e.getMessage());
-            throw new GeneralException(HttpStatus.BAD_REQUEST, ErrorResponse.ERROR_MEDICATION,
-                    "Check your request again");
-        }
+        /*
 
+            // for requestDto
+            try{
+                requestDto = mapper.readValue(request, MedicationRequest.class);
+            } catch (JsonProcessingException e) {
+                log.error("Error while mapping to class --> {}", e.getMessage());
+                throw new GeneralException(HttpStatus.BAD_REQUEST, ErrorResponse.ERROR_MEDICATION,
+                        "Check your request again");
+            }
+
+        */
 
         // check if medication exists before attempting to create new medication
-        Optional<MedicationEntity> foundMedication = medicationRepository.findByName(requestDto.getName());
+        Optional<MedicationEntity> foundMedication = medicationRepository.findByName(name);
         if(foundMedication.isPresent()) {
             throw new GeneralException(HttpStatus.BAD_REQUEST, ErrorResponse.ERROR_MEDICATION,
                     "Medication already exists, cannot create anew");
         }
 
         // prepare to create
-        MedicationEntity medicationEntity = buildMedicationEntity(requestDto, photoLink);
+        MedicationEntity medicationEntity = buildMedicationEntity(name, weight, photoLink);
         boolean canSave = AppUtils.validateMedicationEntityToSave(medicationEntity);
 
         if(!canSave) {
@@ -141,11 +145,12 @@ public class MedicationServiceImpl implements MedicationService {
         return medicationRepository.findByCode(code);
     }
 
-    public MedicationEntity buildMedicationEntity(MedicationRequest request, String photoLink) {
+    public MedicationEntity buildMedicationEntity(String name, Integer weight, String photoLink) {
         return MedicationEntity.builder()
                 .id(UUID.randomUUID().toString())
-                .name(request.getName())
-                .code(AppUtils.generateRandomString(10))
+                .name(name)
+                .code(AppUtils.generateRandomString(10).toUpperCase(Locale.ROOT))
+                .weight(weight)
                 .photoLink(photoLink)
                 .build();
     }

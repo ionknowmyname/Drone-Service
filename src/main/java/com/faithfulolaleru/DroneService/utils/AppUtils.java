@@ -10,17 +10,18 @@ public class AppUtils {
 
     public static boolean validateMedicationName(MedicationEntity entity) {
 
-        if(!entity.getName().matches("^[A-Za-z0-9_-]*$")) {
-            return false;
+        if(entity.getName().matches("^[A-Za-z0-9_-]*$")) {
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     public static boolean validateMedicationCode(MedicationEntity entity) {
 
-        String toUpper = entity.getCode().toUpperCase(Locale.ROOT);
-        if(toUpper.matches("^[A-Z0-9_]*$")) {
+        // String toUpper = entity.getCode().toUpperCase(Locale.ROOT);
+
+        if(entity.getCode().matches("^[A-Z0-9_]*$")) {
             return true;
         }
 
