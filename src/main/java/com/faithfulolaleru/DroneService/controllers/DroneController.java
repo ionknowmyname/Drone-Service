@@ -1,5 +1,6 @@
 package com.faithfulolaleru.DroneService.controllers;
 
+import com.faithfulolaleru.DroneService.dtos.BulkMedicationRequest;
 import com.faithfulolaleru.DroneService.dtos.DroneRequest;
 import com.faithfulolaleru.DroneService.dtos.DroneResponse;
 import com.faithfulolaleru.DroneService.dtos.MedicationResponse;
@@ -43,6 +44,18 @@ public class DroneController {
                 .build();
     }
 
+    @GetMapping("/id/{serial}/batteryPercentage")
+    public AppResponse<?> getBatteryPercentOfDrone(@PathVariable("serial") String serial) {
+
+        String response = droneService.getBatteryPercentOfDrone(serial);
+
+        return AppResponse.builder()
+                .statusCode(HttpStatus.OK.value())
+                .httpStatus(HttpStatus.OK)
+                .message(response)
+                .build();
+    }
+
     @PostMapping("/")
     public AppResponse<?> registerDrone(@RequestBody DroneRequest requestDto) {
 
@@ -51,6 +64,32 @@ public class DroneController {
         return AppResponse.builder()
                 .statusCode(HttpStatus.CREATED.value())
                 .httpStatus(HttpStatus.CREATED)
+                .data(response)
+                .build();
+    }
+
+    @PutMapping("/id{serial}/medications/add")
+    public AppResponse<?> loadMedicationToDrone(@PathVariable("serial") String serial,
+                                                @RequestBody BulkMedicationRequest requestDto) {
+
+        DroneResponse response = droneService.loadMedicationToDrone(serial, requestDto);
+
+        return AppResponse.builder()
+                .statusCode(HttpStatus.OK.value())
+                .httpStatus(HttpStatus.OK)
+                .data(response)
+                .build();
+    }
+
+    @PutMapping("/id{serial}/medications/remove")
+    public AppResponse<?> unloadMedicationToDrone(@PathVariable("serial") String serial,
+                                                @RequestBody BulkMedicationRequest requestDto) {
+
+        DroneResponse response = droneService.unloadMedicationToDrone(serial, requestDto);
+
+        return AppResponse.builder()
+                .statusCode(HttpStatus.OK.value())
+                .httpStatus(HttpStatus.OK)
                 .data(response)
                 .build();
     }

@@ -27,6 +27,13 @@ public class AppUtils {
         return true;
     }
 
+    public static boolean validateDroneToLoad(DroneEntity entity) {
+        if(entity.getBatteryCapacity() < 25) {
+            return false;
+        }
+        return true;
+    }
+
     public static boolean validateMedicationEntityToSave(MedicationEntity entity) {
         if(!validateMedicationName(entity) || !validateMedicationCode(entity)) {
             return false;
