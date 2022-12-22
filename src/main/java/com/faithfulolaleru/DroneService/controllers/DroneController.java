@@ -68,7 +68,7 @@ public class DroneController {
                 .build();
     }
 
-    @PutMapping("/id{serial}/medications/add")
+    @PutMapping("/id/{serial}/medications/add")
     public AppResponse<?> loadMedicationToDrone(@PathVariable("serial") String serial,
                                                 @RequestBody BulkMedicationRequest requestDto) {
 
@@ -81,7 +81,7 @@ public class DroneController {
                 .build();
     }
 
-    @PutMapping("/id{serial}/medications/remove")
+    @PutMapping("/id/{serial}/medications/remove")
     public AppResponse<?> unloadMedicationToDrone(@PathVariable("serial") String serial,
                                                 @RequestBody BulkMedicationRequest requestDto) {
 

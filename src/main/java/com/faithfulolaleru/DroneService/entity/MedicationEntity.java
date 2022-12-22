@@ -1,9 +1,7 @@
 package com.faithfulolaleru.DroneService.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -30,6 +28,8 @@ public class MedicationEntity {
     private String photoLink;
 
     @ManyToOne
+    @JsonIgnore
+    @ToString.Exclude
     @JoinColumn(name = "drone_serial")
     private DroneEntity drone;
 }

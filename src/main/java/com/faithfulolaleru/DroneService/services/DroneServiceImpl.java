@@ -137,7 +137,7 @@ public class DroneServiceImpl implements DroneService {
     public String getBatteryPercentOfDrone(String serial) {
         Integer batteryCapacity = droneRepository.findBySerial(serial).get().getBatteryCapacity();
 
-        return "Battery percentage of Drone is --> {}" + batteryCapacity;
+        return "Battery percentage of Drone is --> " + batteryCapacity;
     }
 
     private DroneEntity buildDroneEntity(DroneRequest request) {

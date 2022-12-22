@@ -113,15 +113,24 @@ public class MedicationServiceImpl implements MedicationService {
 
     @Override
     public MedicationResponse setDroneForMedication(String medicationCode, DroneEntity entity) {
+        // don't throw error if not found, drone service calling iteratively, just ignore if not found
+
         MedicationEntity foundMedication = medicationRepository.findByCode(medicationCode)
-                .orElseThrow(() -> new GeneralException(HttpStatus.NOT_FOUND, ErrorResponse.ERROR_MEDICATION,
-                        "Medication with code not found"));
+                .orElse(null);
 
-        foundMedication.setDrone(entity);
+        // check that found medication not already loaded to a drone before loading to drone
+        if(foundMedication != null && foundMedication.getDrone() == null) {
+            foundMedication.setDrone(entity);
 
-        MedicationEntity savedEntity = medicationRepository.save(foundMedication);
+            MedicationEntity savedEntity = medicationRepository.save(foundMedication);
 
-        return modelMapper.map(savedEntity, MedicationResponse.class);
+            return modelMapper.map(savedEntity, MedicationResponse.class);
+        }
+
+        // if found medication already on a drone, don't update, leave as it is
+
+        // return modelMapper.map(foundMedication, MedicationResponse.class);
+        return null;
 
         // use Update @Query in repo and add @Transactional
         // try it for unsettingDrone
@@ -130,14 +139,17 @@ public class MedicationServiceImpl implements MedicationService {
     @Override
     public MedicationResponse unsetDroneForMedication(String medicationCode) {
         MedicationEntity foundMedication = medicationRepository.findByCode(medicationCode)
-                .orElseThrow(() -> new GeneralException(HttpStatus.NOT_FOUND, ErrorResponse.ERROR_MEDICATION,
-                        "Medication with code not found"));
+                .orElse(null);
 
-        foundMedication.setDrone(null);
+        if(foundMedication != null) {
+            foundMedication.setDrone(null);
 
-        MedicationEntity savedEntity = medicationRepository.save(foundMedication);
+            MedicationEntity savedEntity = medicationRepository.save(foundMedication);
 
-        return modelMapper.map(savedEntity, MedicationResponse.class);
+            return modelMapper.map(savedEntity, MedicationResponse.class);
+        }
+
+        return null;
     }
 
     @Override
