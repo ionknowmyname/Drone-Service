@@ -29,8 +29,8 @@ import java.util.UUID;
 @Slf4j
 public class MedicationServiceImpl implements MedicationService {
 
-    @Value("${file.upload-dir}")
-    private static String filePath;
+    // @Value("${file.upload-dir}")
+    private static String filePath = "/Users/Faithful/Pictures/forJava/";
 
     private final MedicationRepository medicationRepository;
 
@@ -52,6 +52,7 @@ public class MedicationServiceImpl implements MedicationService {
         String photoLink = "";
         String responseMessage = "No file was uploaded";
 
+        // for file
         try {
             if(!file.isEmpty()) {
                 photoLink = filePath + file.getOriginalFilename();
@@ -67,6 +68,7 @@ public class MedicationServiceImpl implements MedicationService {
         }
 
 
+        // for requestDto
         try{
             requestDto = mapper.readValue(request, MedicationRequest.class);
         } catch (JsonProcessingException e) {
@@ -77,7 +79,7 @@ public class MedicationServiceImpl implements MedicationService {
 
 
         // check if medication exists before attempting to create new medication
-        Optional<MedicationEntity> foundMedication = medicationRepository.findByCode(requestDto.getCode());
+        Optional<MedicationEntity> foundMedication = medicationRepository.findByName(requestDto.getName());
         if(foundMedication.isPresent()) {
             throw new GeneralException(HttpStatus.BAD_REQUEST, ErrorResponse.ERROR_MEDICATION,
                     "Medication already exists, cannot create anew");
@@ -143,7 +145,7 @@ public class MedicationServiceImpl implements MedicationService {
         return MedicationEntity.builder()
                 .id(UUID.randomUUID().toString())
                 .name(request.getName())
-                .code(request.getCode())
+                .code(AppUtils.generateRandomString(10))
                 .photoLink(photoLink)
                 .build();
     }

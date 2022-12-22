@@ -11,4 +11,6 @@ public interface MedicationRepository extends JpaRepository<MedicationEntity, St
 
 
     Optional<MedicationEntity> findByCode(String code);
+
+    Optional<MedicationEntity> findByName(String name);
 }
