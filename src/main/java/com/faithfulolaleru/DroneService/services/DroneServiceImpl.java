@@ -140,14 +140,24 @@ public class DroneServiceImpl implements DroneService {
         return "Battery percentage of Drone is --> " + batteryCapacity;
     }
 
+    @Override
+    public List<DroneResponse> getAllDronesByState(DroneState state) {
+
+        // DroneState.IDLE can give you all available drones for loading
+
+        return droneRepository.findAllByState(state).stream()
+            .map(dEntity -> modelmapper.map(dEntity, DroneResponse.class))
+            .collect(Collectors.toList());
+    }
+
     private DroneEntity buildDroneEntity(DroneRequest request) {
         return DroneEntity.builder()
-                .serial(UUID.randomUUID().toString())
-                .model(request.getModel())
-                .weight(request.getWeight())
-                .batteryCapacity(request.getBatteryCapacity())
-                .state(request.getState())
-                .build();
+            .serial(UUID.randomUUID().toString())
+            .model(request.getModel())
+            .weight(request.getWeight())
+            .batteryCapacity(request.getBatteryCapacity())
+            .state(request.getState())
+            .build();
     }
 
     private DroneEntity mountOnDrone(DroneEntity dEntity, List<MedicationEntity> mEntities) {
@@ -170,7 +180,7 @@ public class DroneServiceImpl implements DroneService {
         // .reduce(0, (a, b) -> a + b);
 
         dEntity.setWeight(dEntity.getWeight() - weightSum);
-        dEntity.setState(DroneState.IDLE);
+        dEntity.setState(DroneState.DELIVERED);
 
         // remove only medications in the list, leave the rest there
         List<MedicationEntity> currentMedications = dEntity.getMedications();

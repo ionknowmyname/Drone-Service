@@ -4,6 +4,7 @@ import com.faithfulolaleru.DroneService.dtos.BulkMedicationRequest;
 import com.faithfulolaleru.DroneService.dtos.DroneRequest;
 import com.faithfulolaleru.DroneService.dtos.DroneResponse;
 import com.faithfulolaleru.DroneService.dtos.MedicationResponse;
+import com.faithfulolaleru.DroneService.enums.DroneState;
 import com.faithfulolaleru.DroneService.response.AppResponse;
 import com.faithfulolaleru.DroneService.services.DroneService;
 import lombok.AllArgsConstructor;
@@ -53,6 +54,18 @@ public class DroneController {
                 .statusCode(HttpStatus.OK.value())
                 .httpStatus(HttpStatus.OK)
                 .message(response)
+                .build();
+    }
+
+    @GetMapping("/all")
+    public AppResponse<?> getAllDronesByState(@RequestParam(value = "name") DroneState state) {
+
+        List<DroneResponse> response = droneService.getAllDronesByState(state);
+
+        return AppResponse.builder()
+                .statusCode(HttpStatus.OK.value())
+                .httpStatus(HttpStatus.OK)
+                .data(response)
                 .build();
     }
 

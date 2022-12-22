@@ -5,11 +5,12 @@
 **Summary of Service:**
     Drone Service for transporting Medical supplies. Service can:
     -   create drones 
-    -   create medication
+    -   create medication with picture file
     -   load medications to drone in bulk
     -   offload medications from drone in bulk 
     -   check all medications on a given drone
     -   get battery capacity for any given drone
+    -   get all drones by given state
 
 
 **Setup:**

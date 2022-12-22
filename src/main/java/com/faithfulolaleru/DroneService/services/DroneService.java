@@ -4,6 +4,7 @@ import com.faithfulolaleru.DroneService.dtos.BulkMedicationRequest;
 import com.faithfulolaleru.DroneService.dtos.DroneRequest;
 import com.faithfulolaleru.DroneService.dtos.DroneResponse;
 import com.faithfulolaleru.DroneService.dtos.MedicationResponse;
+import com.faithfulolaleru.DroneService.enums.DroneState;
 
 import java.util.List;
 
@@ -20,4 +21,6 @@ public interface DroneService {
     DroneResponse unloadMedicationToDrone(String serial, BulkMedicationRequest requestDto);
 
     String getBatteryPercentOfDrone(String serial);
+
+    List<DroneResponse> getAllDronesByState(DroneState state);
 }
