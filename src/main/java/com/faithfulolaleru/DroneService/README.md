@@ -11,6 +11,7 @@
     -   check all medications on a given drone
     -   get battery capacity for any given drone
     -   get all drones by given state
+    -   store battery percentage log using cronjob
 
 
 **Setup:**

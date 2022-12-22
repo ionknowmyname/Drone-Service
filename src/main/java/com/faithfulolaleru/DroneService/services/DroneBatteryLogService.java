@@ -1,11 +1,14 @@
 package com.faithfulolaleru.DroneService.services;
 
+import com.faithfulolaleru.DroneService.dtos.DroneBatteryLogResponse;
+import com.faithfulolaleru.DroneService.dtos.DroneResponse;
 import com.faithfulolaleru.DroneService.entity.DroneBatteryLogEntity;
 import com.faithfulolaleru.DroneService.entity.DroneEntity;
 import com.faithfulolaleru.DroneService.repository.DroneBatteryLogRepository;
 import com.faithfulolaleru.DroneService.repository.DroneRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -22,6 +25,8 @@ public class DroneBatteryLogService {
 
     private final DroneRepository droneRepository;
 
+    private final ModelMapper modelMapper;
+
 
     public boolean saveDroneBatteryLog() {
 
@@ -36,6 +41,13 @@ public class DroneBatteryLogService {
         return true;
     }
 
+
+    public List<DroneBatteryLogResponse> getAllBatteryLogsByBatterySerial(String serial) {
+
+        return droneBatteryLogRepository.findAllByDroneSerial(serial).stream()
+                .map(dbl -> modelMapper.map(dbl, DroneBatteryLogResponse.class))
+                .collect(Collectors.toList());
+    }
     private DroneBatteryLogEntity buildDroneBatteryLogEntity(DroneEntity entity) {
 
         return DroneBatteryLogEntity.builder()
