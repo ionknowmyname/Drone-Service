@@ -11,6 +11,7 @@ import com.faithfulolaleru.DroneService.utils.AppUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,11 +30,18 @@ import java.util.UUID;
 public class MedicationServiceImpl implements MedicationService {
 
     @Value("${file.upload-dir}")
-    private String filePath;
+    private static String filePath;
 
     private final MedicationRepository medicationRepository;
 
     private final ModelMapper modelMapper;
+
+//    public MedicationServiceImpl(String filePath, MedicationRepository medicationRepository,
+//                              ModelMapper modelMapper){
+//        this.filePath = filePath;
+//        this.medicationRepository = medicationRepository;
+//        this.modelMapper = modelMapper;
+//    }
 
 
     @Override

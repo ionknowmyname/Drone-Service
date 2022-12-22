@@ -1,8 +1,5 @@
 package com.faithfulolaleru.DroneService.controllers;
 
-import com.faithfulolaleru.DroneService.dtos.DroneRequest;
-import com.faithfulolaleru.DroneService.dtos.DroneResponse;
-import com.faithfulolaleru.DroneService.dtos.MedicationRequest;
 import com.faithfulolaleru.DroneService.dtos.MedicationResponse;
 import com.faithfulolaleru.DroneService.response.AppResponse;
 import com.faithfulolaleru.DroneService.services.MedicationService;
