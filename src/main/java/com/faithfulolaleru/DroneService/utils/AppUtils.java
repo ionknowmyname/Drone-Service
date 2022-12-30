@@ -2,10 +2,11 @@ package com.faithfulolaleru.DroneService.utils;
 
 import com.faithfulolaleru.DroneService.entity.DroneEntity;
 import com.faithfulolaleru.DroneService.entity.MedicationEntity;
+import lombok.NoArgsConstructor;
 
 import java.util.Locale;
 
-
+@NoArgsConstructor
 public class AppUtils {
 
     public static boolean validateMedicationName(MedicationEntity entity) {
