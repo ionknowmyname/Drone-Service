@@ -25,7 +25,7 @@ public class DroneBatteryLogController {
     @GetMapping("/id/{serial}")
     public AppResponse<?> getAllBatteryLogsByBatterySerial(@PathVariable("serial") String serial) {
 
-        List<DroneBatteryLogResponse> response = droneBatteryLogService.getAllBatteryLogsByBatterySerial(serial);
+        List<DroneBatteryLogResponse> response = droneBatteryLogService.getAllBatteryLogsByDroneSerial(serial);
 
         return AppResponse.builder()
                 .statusCode(HttpStatus.OK.value())

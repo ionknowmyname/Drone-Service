@@ -58,7 +58,7 @@ public class DroneController {
     }
 
     @GetMapping("/all")
-    public AppResponse<?> getAllDronesByState(@RequestParam(value = "name") DroneState state) {
+    public AppResponse<?> getAllDronesByState(@RequestParam(value = "state") DroneState state) {
 
         List<DroneResponse> response = droneService.getAllDronesByState(state);
 

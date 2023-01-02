@@ -42,7 +42,7 @@ public class DroneBatteryLogService {
     }
 
 
-    public List<DroneBatteryLogResponse> getAllBatteryLogsByBatterySerial(String serial) {
+    public List<DroneBatteryLogResponse> getAllBatteryLogsByDroneSerial(String serial) {
 
         return droneBatteryLogRepository.findAllByDroneSerial(serial).stream()
                 .map(dbl -> modelMapper.map(dbl, DroneBatteryLogResponse.class))

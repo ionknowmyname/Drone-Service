@@ -23,8 +23,42 @@
 
 **Endpoints & Sample Payload:**
 
-    1.  POST 
+    1.  POST --> localhost:8080/api/v1/drone -- Creates a drone with sample payload below
+        {
+            "model": "LIGHTWEIGHT",
+            "weight": 30,
+            "batteryCapacity": 85,
+            "state": "IDLE"
+        }
 
+    2.  GET --> localhost:8080/api/v1/drone/id/{serial} -- Get drone by serial
+
+    3.  GET --> localhost:8080/api/v1/drone/id/{serial}/batteryPercentage  -- Get Battery percentage of a drone
+
+    4.  GET --> localhost:8080/api/v1/drone/id/{serial}/medications  -- Get all medications loaded on a drone
+
+    5.  GET --> localhost:8080/api/v1/drone/all?state=IDLE -- Get all drones by state
+
+    6.  PUT --> localhost:8080/api/v1/drone/id/{serial}/medications/add -- Load medications to drone using list
+            of medication codes, like sample payload below:
+        {
+            "medicationCodes": [
+                "RFcBRUs0O7"
+            ]
+        }
+
+    7.  PUT --> localhost:8080/api/v1/drone/id/{serial}/medications/remove -- Unload medications to drone using list
+            of medication codes, like sample payload below:
+        {
+            "medicationCodes": [
+                "RFcBRUs0O7"
+            ]
+        }
+
+    8.  POST --> localhost:8080/api/v1/medication/?name=Testing14&weight=20 -- Create new medication with name & weight 
+            params, then add file to upload in request body as form-data
+
+    9.  GET --> localhost:8080/api/v1/droneBatteryLog/id/{serial} -- Get all battery logs by drone serial
 
 
 **More Information:**
