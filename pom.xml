@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.faithfulolaleru</groupId>
-	<artifactId>Drone-Service</artifactId>
+	<artifactId>drone-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Drone-Service</name>
+	<name>drone-service</name>
 	<description>for Interview</description>
 	<properties>
 		<java.version>11</java.version>

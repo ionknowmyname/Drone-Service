@@ -17,8 +17,14 @@
 **Setup:**
     No setup required, clone project and open in IntelliJ IDE and run. Runs on port 8080.
     Checkout application.properties file for more info.
+    
     OR 
+
     Run "mvn spring-boot:run" in terminal
+
+    OR 
+
+    Build & Run with Dockerfile
 
 
 **Endpoints & Sample Payload:**
