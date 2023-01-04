@@ -22,6 +22,7 @@ public class DroneEntity {
     @Id
     private String serial;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "drone_model")
     private DroneModel model;
 
@@ -31,6 +32,7 @@ public class DroneEntity {
     @Column(name = "battery_capacity")
     private Integer batteryCapacity;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "drone_state")
     private DroneState state;
 
